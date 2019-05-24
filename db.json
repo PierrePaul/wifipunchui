@@ -1,0 +1,40 @@
+{
+  "user": [
+    {
+      "id": "edouard-duplessis",
+      "mac_addresses": [
+        {
+          "mac_address": "00:01:2e:6f:84:60",
+          "user": "edouard-duplessis"
+        },
+        {
+          "mac_address": "12:23:34:22:65",
+          "user": "edouard-duplessis"
+        }
+      ],
+      "name": "Edouard Duplessis"
+    },
+    {
+      "id": "pierre-paul-lefevre",
+      "mac_addresses": [
+        {
+          "mac_address": "00:01:2e:6f:84:60",
+          "user": "pierre-paul-lefevre"
+        },
+        {
+          "mac_address": "12:23:34:22:65",
+          "user": "pierre-paul-lefevre"
+        }
+      ],
+      "name": "Pierre Paul Lefevre"
+    }
+  ],
+  "mac": {
+    "mine": {
+      "ip": "192.168.42.205",
+      "ip_range": "192.168.42.205/32",
+      "mac": "00:01:2e:6f:84:60",
+      "user": "edouard-duplessis"
+    }
+  }
+}
