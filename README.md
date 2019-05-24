@@ -1,10 +1,20 @@
 # wifiPunch
 
-> Automatic Punch for EvolvingWeb
+> Automatic Punch UI for EvolvingWeb
+
+## Setup full fake REST API
+
+```bash
+# Install JSON Server
+$ npm install -g json-server
+
+# Start JSON Server
+$ json-server --watch db.json --port 3004 --routes routes.json
+```
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 
@@ -18,5 +28,3 @@ $ npm start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
