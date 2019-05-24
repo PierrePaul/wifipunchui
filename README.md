@@ -28,3 +28,7 @@ $ npm start
 # generate static project
 $ npm run generate
 ```
+
+### In Docker
+
+run `docker-compose up --build`, it will generate the app in the `build` folder
