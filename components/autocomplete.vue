@@ -58,7 +58,7 @@ export default {
       results: [],
       search: '',
       isLoading: false,
-      arrowCounter: 0,
+      arrowCounter: -1,
       activedescendant: ''
     }
   },
@@ -66,7 +66,7 @@ export default {
   methods: {
     onChange() {
       // Let's warn the parent that a change was made
-      this.$emit('input', this.search)
+      // this.$emit('input', this.search)
 
       // Is the data given by an outside ajax request?
       if (this.isAsync) {
@@ -87,12 +87,14 @@ export default {
     setResult(result) {
       this.search = result
       this.isOpen = false
+      this.$emit('input', this.search)
     },
     onArrowDown(evt) {
       if (this.isOpen) {
         if (this.arrowCounter < this.results.length) {
           this.arrowCounter = this.arrowCounter + 1
           this.setActiveDescendent()
+          this.search = this.results[this.arrowCounter]
         }
       }
     },
@@ -101,11 +103,13 @@ export default {
         if (this.arrowCounter > 0) {
           this.arrowCounter = this.arrowCounter - 1
           this.setActiveDescendent()
+          this.search = this.results[this.arrowCounter]
         }
       }
     },
     onEnter() {
-      this.search = this.results[this.arrowCounter]
+      this.$emit('sendUser', this.search)
+
       this.isOpen = false
       this.arrowCounter = -1
     },
@@ -145,7 +149,10 @@ export default {
 <style>
 .autocomplete {
   position: relative;
-  width: 130px;
+  width: 100%;
+}
+.autocomplete input {
+  width: 100%;
 }
 
 .autocomplete-results {

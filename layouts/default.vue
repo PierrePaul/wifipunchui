@@ -55,4 +55,38 @@ h4 {
 .button:hover {
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
 }
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+}
+.card {
+  width: 100%;
+  min-height: 300px;
+  max-width: 300px;
+  height: auto;
+  background: #fff;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+.header-img {
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  height: 250px;
+  background-position: center center;
+}
+
+.content {
+  padding: 20px;
+  text-align: left;
+}
+.card .action {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
 </style>

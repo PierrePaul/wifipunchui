@@ -1,0 +1,11 @@
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.5s;
+  transform-origin: center 300px;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+  transform: scale(0.97);
+  transform-origin: center 300px;
+}

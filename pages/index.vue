@@ -1,26 +1,13 @@
 <template>
   <section class="container">
-    <div v-if="user" class="card">
-      <div class="header-img hello"></div>
+    <div class="card">
+      <div class="header-img"></div>
       <div class="content">
-        <h1>Bonjour</h1>
-        <p>Etes-vous bien {{user.name}}</p>
+        <h1>Hi</h1>
+        <p>Are you {{user.name}} ?</p>
         <div class="action">
-          <button class="button no">NON</button>
-          <button class="button yes">OUI</button>
-        </div>
-      </div>
-    </div>
-    <div v-else class="card">
-      <div class="header-img lost"></div>
-      <div class="content">
-        <h1>Bonjour</h1>
-        <p>Désoler mais je n’arrive pas à vous trouver. Aidez-moi s'il vous plaît</p>
-        <div class="action">
-          <autocomplete
-            :items="[ 'Apple', 'Banana', 'Orange', 'Mango', 'Pear', 'Peach', 'Grape', 'Tangerine', 'Pineapple']"
-            aria-labelled-by="fruitlabel"
-          />
+          <nuxt-link to="/help" class="button no">No</nuxt-link>
+          <nuxt-link to="/thanks" class="button yes">Yes</nuxt-link>
         </div>
       </div>
     </div>
@@ -28,67 +15,44 @@
 </template>
 
 <script>
-import UserServices from '~/services/UserServices'
-import autocomplete from '~/components/autocomplete.vue'
+import axios from 'axios'
 export default {
-  components: {
-    autocomplete
-  },
   data() {
     return {
       user: false
     }
   },
-  asyncData() {
-    return UserServices.getMe().then(response => {
-      return UserServices.getUser(response.data.mine.user).then(response => {
-        return { user: response.data[0] }
+  asyncData({ error, redirect }) {
+    return axios
+      .get('http://localhost:5000/mac/mine')
+      .then(response => {
+        if (!response.data.user) redirect('/help')
+        return axios
+          .get('http://localhost:5000/user/' + response.data.user)
+          .then(response => {
+            return { user: response.data[0] }
+          })
+          .catch(e => {
+            error({
+              statusCode: 503,
+              message: 'Désoler mais un probleme est survenu'
+            })
+          })
       })
-    })
+      .catch(e => {
+        error({
+          statusCode: 503,
+          message: 'Désoler mais un probleme est survenu'
+        })
+      })
   }
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  padding: 40px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  text-align: center;
-}
-.card {
-  width: 100%;
-  min-height: 300px;
-  height: auto;
-  background: #fff;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-}
+<style scoped>
 .header-img {
-  border-radius: 10px 10px 0 0;
-  overflow: hidden;
-  height: 250px;
-  background-position: center center;
-}
-.header-img.hello {
   background-image: url('~assets/img/hello.jpg');
   background-size: 350%;
-}
-.header-img.lost {
-  background-image: url('~assets/img/lost.jpg');
-  background-size: 175%;
-  background-position: 75% center;
-}
-.content {
-  padding: 20px;
-  text-align: left;
-}
-.card .action {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
+  background-position: center center;
 }
 </style>
