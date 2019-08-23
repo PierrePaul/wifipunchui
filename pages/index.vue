@@ -24,25 +24,25 @@ export default {
   },
   asyncData({ error, redirect }) {
     return axios
-      .get('http://localhost:5000/mac/mine')
+      .get('/mac/mine')
       .then(response => {
         if (!response.data.user) redirect('/help')
         return axios
-          .get('http://localhost:5000/user/' + response.data.user)
+          .get('/user/' + response.data.user)
           .then(response => {
             return { user: response.data[0] }
           })
           .catch(e => {
             error({
               statusCode: 503,
-              message: 'Désoler mais un probleme est survenu'
+              message: 'Error getting the user : ' + e
             })
           })
       })
       .catch(e => {
         error({
           statusCode: 503,
-          message: 'Désoler mais un probleme est survenu'
+          message: 'Error getting my mac address : ' + e
         })
       })
   }

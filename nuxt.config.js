@@ -49,7 +49,10 @@ module.exports = {
    ** Axios module configuration
    */
   axios: {
+      baseURL: "http://:5000/"
     // See https://github.com/nuxt-community/axios-module#options
+      // host: localhost,
+      // port: 5000,
   },
 
   /*
