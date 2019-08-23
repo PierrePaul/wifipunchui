@@ -3,7 +3,7 @@
     <div class="card">
       <div class="header-img"></div>
       <div class="content">
-        <h1>Thanks you!</h1>
+        <h1>Thank you!</h1>
       </div>
     </div>
   </section>
