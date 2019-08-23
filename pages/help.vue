@@ -34,7 +34,7 @@ export default {
     }
   },
   asyncData({ $axios, redirect }) {
-    return $axios.get('http://localhost:5000/user').then(response => {
+    return $axios.get('http://:5000/user').then(response => {
       return {
         userList: response.data
       }
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async setUser(id) {
-      const username = await this.$axios.$post('http://localhost:5000/link', {
+      const username = await this.$axios.$post('http://:5000/link', {
         username: id
       })
       this.$router.push({ path: '/thanks' })

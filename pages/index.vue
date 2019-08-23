@@ -24,11 +24,11 @@ export default {
   },
   asyncData({ error, redirect }) {
     return axios
-      .get('http://localhost:5000/mac/mine')
+      .get('http://:5000/mac/mine')
       .then(response => {
         if (!response.data.user) redirect('/help')
         return axios
-          .get('http://localhost:5000/user/' + response.data.user)
+          .get('http://:5000/user/' + response.data.user)
           .then(response => {
             return { user: response.data[0] }
           })
