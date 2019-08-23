@@ -22,7 +22,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 import autocomplete from '~/components/autocomplete.vue'
 export default {
   components: {
@@ -34,7 +34,7 @@ export default {
     }
   },
   asyncData({ $axios, redirect }) {
-    return $axios.get('http://:5000/user').then(response => {
+    return axios.get('/user').then(response => {
       return {
         userList: response.data
       }
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     async setUser(id) {
-      const username = await this.$axios.$post('http://:5000/link', {
+      const username = await axios.post('/link', {
         username: id
       })
       this.$router.push({ path: '/thanks' })
