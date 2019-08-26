@@ -4,7 +4,9 @@
       <div class="header-img"></div>
       <div class="content">
         <h1>Sorry</h1>
-        <p>I can't find you. I need a little help</p>
+        <p>I can't find you.</p>
+        <p>I need a little help.</p>
+        <p>What's your e-mail?</p>
         <div class="action">
           <label id="UserList">User list</label>
 
@@ -14,8 +16,10 @@
             aria-labelled-by="UserList"
             v-on:input="setUser( $event )"
             v-on:sendUser="setUser( $event )"
+            v-on:searchChanged="search = $event"
           />
         </div>
+        <button class="send" v-bind:disabled="this.search === ''" v-on:click="setUser(this.search)">Send</button>
       </div>
     </div>
   </section>
@@ -30,7 +34,8 @@ export default {
   },
   data() {
     return {
-      userList: []
+        userList: [],
+        search: ''
     }
   },
   asyncData({ $axios, redirect }) {
@@ -38,15 +43,15 @@ export default {
       return {
         userList: response.data
       }
-    })
+    }).catch(e => console.error(e))
   },
   methods: {
     async setUser(id) {
-      const username = await axios.post('/link', {
+      await axios.post('/link', {
         username: id
-      })
+      });
       this.$router.push({ path: '/thanks' })
-    }
+    },
   },
   computed: {
     userListName() {
@@ -67,6 +72,18 @@ export default {
   background-image: url('~assets/img/lost.jpg');
   background-size: 175%;
   background-position: 75% center;
+}
+.send:disabled {
+  opacity: 0.5
+}
+.send {
+  background-color: #5cb85c;
+  border: 0px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  font-family: 'Open Sans';
 }
 
 label {

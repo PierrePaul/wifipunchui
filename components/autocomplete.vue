@@ -76,6 +76,7 @@ export default {
         this.filterResults()
         this.isOpen = true
       }
+      this.$emit('searchChanged', this.search);
     },
 
     filterResults() {
